@@ -1,17 +1,17 @@
 local M = {}
 
-local dict_helper = require("lib.dict_helper")
+local dict_utils = require("lib.dict_utils")
 
 M.ObjectBase = {
   fields = {},
   _meta = { __index = {} },
   extend = function(cls, args)
-    args = dict_helper.merge({
+    args = dict_utils.merge({
       fields = {},
       static = {},
     }, args)
-    local rst = dict_helper.merge(cls, args.static)
-    rst.fields = dict_helper.merge(rst.fields, args.fields)
+    local rst = dict_utils.merge(cls, args.static)
+    rst.fields = dict_utils.merge(rst.fields, args.fields)
     rst._meta = { __index = rst.fields }
     rst.base = cls
     return rst
@@ -58,7 +58,7 @@ M.Object = M.ObjectBase:extend({
       cls._cache[#cls._cache + 1] = obj
     end,
     extend = function(cls, args)
-      args = dict_helper.merge({
+      args = dict_utils.merge({
         static = { _cache = {} },
       }, args)
       return cls.base.extend(cls, args)
