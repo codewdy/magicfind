@@ -1,0 +1,27 @@
+local object = require("lib.object")
+
+TestCase("object.new_and_delete", function()
+  object.Object._cache = {}
+  local a = object.Object:new()
+  local b = object.Object:new()
+  a:release()
+  local c = object.Object:new()
+  Assert(a == c)
+  Assert(a ~= b)
+end)
+
+TestCase("object.extend", function()
+  object.Object._cache = {}
+  local x = object.Object:new()
+  local cls = object.Object:extend({fields = { a = 1 }})
+  local a = cls:new()
+  local b = cls:new()
+  a:release()
+  local c = cls:new()
+  Assert(a == c)
+  Assert(a ~= b)
+  Assert(a ~= x)
+  Assert(b ~= x)
+  Assert(a.a == 1)
+  Assert(b.a == 1)
+end)

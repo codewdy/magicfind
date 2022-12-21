@@ -12,6 +12,7 @@ M.ObjectBase = {
     }, args)
     local rst = dict_utils.merge(cls, args.static)
     rst.fields = dict_utils.merge(rst.fields, args.fields)
+    rst.fields._class = rst
     rst._meta = { __index = rst.fields }
     rst.base = cls
     return rst
@@ -32,7 +33,7 @@ M.Object = M.ObjectBase:extend({
     _clear = function(self)
     end,
     release = function(self)
-      self.cls:delete(self)
+      self._class:delete(self)
     end,
     equal = function(self, rhs)
       return self == rhs
@@ -42,7 +43,7 @@ M.Object = M.ObjectBase:extend({
     _cache = {},
     _new = function(cls)
       if #cls._cache == 0 then
-        return M.ObjectBase:new()
+        return M.ObjectBase.new(cls)
       else
         local rst = cls._cache[#cls._cache]
         cls._cache[#cls._cache] = nil
@@ -52,6 +53,7 @@ M.Object = M.ObjectBase:extend({
     new = function(cls, ...)
       local rst = cls:_new()
       rst:_init(...)
+      return rst
     end,
     delete = function(cls, obj)
       obj:_clear()
