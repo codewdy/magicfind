@@ -29,7 +29,6 @@ function M.test_main()
   end
   table.sort(cases)
   local failed = {}
-  print(#cases)
   for _,case in ipairs(cases) do
     local status, err = pcall(M.cases[case])
     if status then
