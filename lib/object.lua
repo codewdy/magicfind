@@ -34,6 +34,9 @@ M.Object = M.ObjectBase:extend({
     release = function(self)
       self.cls:delete(self)
     end,
+    equal = function(self, rhs)
+      return self == rhs
+    end,
   },
   static = {
     _cache = {},
