@@ -35,14 +35,14 @@ end
 
 function M.assert(b)
   if not b then
-    error("assert error. " + debug.traceback())
+    error("assert error. " .. debug.traceback())
   end
 end
 
 function M.assert_equal(a, b)
   local msg = M.equal_msg(a, b)
   if msg ~= nil then
-    error(msg + debug.traceback())
+    error(msg .. debug.traceback())
   end
 end
 

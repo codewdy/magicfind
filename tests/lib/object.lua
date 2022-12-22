@@ -45,3 +45,15 @@ TestCase("object.extend_and_extend", function()
   Assert(cls.b == 2)
   Assert(cls.c == 3)
 end)
+
+TestCase("object.first_init", function()
+  local x = 0
+  local cls = object.Object:extend({
+    fields = {_first_init=function(self) self.x = x end}
+  })
+  local a = cls:new()
+  x = 1
+  local b = cls:new()
+  Assert(a.x == 0)
+  Assert(b.x == 1)
+end)

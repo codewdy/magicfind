@@ -43,7 +43,9 @@ M.Object = M.ObjectBase:extend({
     _cache = {},
     _new = function(cls)
       if #cls._cache == 0 then
-        return M.ObjectBase.new(cls)
+        local rst = M.ObjectBase.new(cls)
+        rst:_first_init()
+        return rst
       else
         local rst = cls._cache[#cls._cache]
         cls._cache[#cls._cache] = nil
