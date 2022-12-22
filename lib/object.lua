@@ -63,7 +63,7 @@ M.Object = M.ObjectBase:extend({
       args = dict_utils.merge({
         static = { _cache = {} },
       }, args)
-      return cls.base.extend(cls, args)
+      return M.ObjectBase.extend(cls, args)
     end,
   },
 })
