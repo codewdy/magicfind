@@ -8,9 +8,12 @@ M.List = object.Object:extend{
       self.size = 0
     end,
     _clear = function(self)
-      self:resize(0)
+      self:clear()
     end,
     _erase_unit = function(self, unit)
+    end,
+    clear = function(self)
+      self:clear()
     end,
     resize = function(self, size)
       if self.size < size then
