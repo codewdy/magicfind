@@ -22,6 +22,15 @@ M.ObjectBase = {
     setmetatable(rst, cls._meta)
     return rst
   end,
+  is_based_of = function(cls, src_cls)
+    if cls == src_cls then
+      return true
+    elseif cls == M.ObjectBase then
+      return false
+    else
+      return cls.base:is_based_of(src_cls)
+    end
+  end,
 }
 
 M.Object = M.ObjectBase:extend{
@@ -34,6 +43,9 @@ M.Object = M.ObjectBase:extend{
     end,
     release = function(self)
       self._class:delete(self)
+    end,
+    is_instance = function(self, cls)
+      return self.cls:is_instance(cls)
     end,
     equal = function(self, rhs)
       return self == rhs

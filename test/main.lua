@@ -5,4 +5,6 @@ require("test.lib.dict_utils")
 require("test.lib.object")
 require("test.lib.list")
 
+require("test.framework.hit_test")
+
 TestMain()

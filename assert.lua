@@ -20,13 +20,10 @@ function M.equal_msg(a, b)
   if type(a) == "table" then
     if list.List:is_list(a) or list.List:is_list(b) then
       if #a ~= #b then
-        return " : length error. " .. tostring(#a) .. " vs " .. tostring(#b)
+        return " : length error. "
       end
       for i = 1,#a do
-        local rst = M.equal_msg(a[i], b[i])
-        if rst ~= nil then
-          return tostring(i) .. "." .. rst
-        end
+        local rst = M.equal_msg(v, b[k])
       end
       return nil
     end
@@ -40,7 +37,7 @@ function M.equal_msg(a, b)
     for k, v in pairs(a) do
       local rst = M.equal_msg(v, b[k])
       if rst ~= nil then
-        return k .. "." .. rst
+        return k .. "."
       end
     end
     return nil
@@ -49,14 +46,14 @@ end
 
 function M.assert(b)
   if not b then
-    error("assert error.\n" .. debug.traceback())
+    error("assert error. " .. debug.traceback())
   end
 end
 
 function M.assert_equal(a, b)
   local msg = M.equal_msg(a, b)
   if msg ~= nil then
-    error(msg .. "\n" .. debug.traceback())
+    error(msg .. debug.traceback())
   end
 end
 

@@ -13,7 +13,7 @@ M.List = object.Object:extend{
     _erase_unit = function(self, unit)
     end,
     clear = function(self)
-      self:clear()
+      self:resize(0)
     end,
     resize = function(self, size)
       if self.size < size then
@@ -44,6 +44,17 @@ M.List = object.Object:extend{
     back = function(self)
       return self[self.size]
     end,
+  },
+  static = {
+    is_list = function(cls, obj)
+      if #obj > 0 then
+        return true
+      elseif type(obj.is_instace) == "function" then
+        return obj:is_instace(M.List)
+      else
+        return false
+      end
+    end
   }
 }
 
