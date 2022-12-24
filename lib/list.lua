@@ -2,7 +2,7 @@ local M = {}
 
 local object = require("lib.object")
 
-M.List = object.Object:extend({
+M.List = object.Object:extend{
   fields = {
     _first_init = function(self)
       self.size = 0
@@ -42,9 +42,9 @@ M.List = object.Object:extend({
       return self[self.size]
     end,
   }
-})
+}
 
-M.OwnedObjectList = M.List:extend({
+M.OwnedObjectList = M.List:extend{
   fields = {
     _erase_unit = function(self, unit)
       if unit ~= nil then
@@ -52,6 +52,6 @@ M.OwnedObjectList = M.List:extend({
       end
     end
   }
-})
+}
 
 return M

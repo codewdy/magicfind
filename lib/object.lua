@@ -24,7 +24,7 @@ M.ObjectBase = {
   end,
 }
 
-M.Object = M.ObjectBase:extend({
+M.Object = M.ObjectBase:extend{
   fields = {
     _init = function(self)
     end,
@@ -68,6 +68,6 @@ M.Object = M.ObjectBase:extend({
       return M.ObjectBase.extend(cls, args)
     end,
   },
-})
+}
 
 return M

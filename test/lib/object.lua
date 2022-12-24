@@ -13,7 +13,7 @@ end)
 TestCase("object.extend", function()
   object.Object._cache = {}
   local x = object.Object:new()
-  local cls = object.Object:extend({fields = { a = 1 }, static = { b = 2 }})
+  local cls = object.Object:extend{fields = { a = 1 }, static = { b = 2 }}
   local a = cls:new()
   local b = cls:new()
   a:release()
@@ -30,8 +30,8 @@ end)
 TestCase("object.extend_and_extend", function()
   object.Object._cache = {}
   local x = object.Object:new()
-  local cls = object.Object:extend({fields = { a = 1 }, static = { b = 2 }})
-  cls = cls:extend({fields = { a = 2 }, static = { c = 3 }})
+  local cls = object.Object:extend{fields = { a = 1 }, static = { b = 2 }}
+  cls = cls:extend{fields = { a = 2 }, static = { c = 3 }}
   local a = cls:new()
   local b = cls:new()
   a:release()
@@ -48,9 +48,9 @@ end)
 
 TestCase("object.first_init", function()
   local x = 0
-  local cls = object.Object:extend({
+  local cls = object.Object:extend{
     fields = {_first_init=function(self) self.x = x end}
-  })
+  }
   local a = cls:new()
   x = 1
   local b = cls:new()
