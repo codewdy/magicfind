@@ -1,7 +1,7 @@
 local M = {}
 
-local assert = require("tests.test_framework.assert")
-local core = require("tests.test_framework.core")
+local assert = require("test.test_framework.assert")
+local core = require("test.test_framework.core")
 
 M.test_case = core.test_case
 TestCase = M.test_case
