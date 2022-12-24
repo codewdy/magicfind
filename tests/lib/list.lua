@@ -1,6 +1,6 @@
 local list = require("lib.list")
 
-TestCase("SimpleList", function()
+TestCase("lib.list.simple", function()
   local lst = list.List:new()
   lst:push_back(1)
   lst:push_back(2)
