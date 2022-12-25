@@ -3,8 +3,10 @@ local M = {}
 function M.merge(...)
   local rst = {}
   for _,dict in ipairs({...}) do
-    for k,v in pairs(dict) do
-      rst[k] = v
+    if dict ~= nil then
+      for k,v in pairs(dict) do
+        rst[k] = v
+      end
     end
   end
   return rst

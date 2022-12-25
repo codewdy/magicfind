@@ -5,13 +5,11 @@ local DictUtils = require("lib.dict_utils")
 M.ObjectBase = {
   fields = {},
   _meta = { __index = {} },
-  extend = function(cls, args)
-    args = DictUtils.merge({
-      fields = {},
-      static = {},
-    }, args)
-    local rst = DictUtils.merge(cls, args.static)
-    rst.fields = DictUtils.merge(rst.fields, args.fields)
+  extend = function(cls, fields)
+    fields = DictUtils.merge({ __static = {} }, fields)
+    local rst = DictUtils.merge(cls, fields.__static)
+    fields.__static = nil
+    rst.fields = DictUtils.merge(rst.fields, fields)
     rst.fields._class = rst
     rst._meta = { __index = rst.fields }
     rst.base = cls
@@ -34,24 +32,22 @@ M.ObjectBase = {
 }
 
 M.Object = M.ObjectBase:extend{
-  fields = {
-    _init = function(self)
-    end,
-    _first_init = function(self)
-    end,
-    _clear = function(self)
-    end,
-    release = function(self)
-      self._class:delete(self)
-    end,
-    is_instance = function(self, cls)
-      return self.cls:is_instance(cls)
-    end,
-    equal = function(self, rhs)
-      return self == rhs
-    end,
-  },
-  static = {
+  _init = function(self)
+  end,
+  _first_init = function(self)
+  end,
+  _clear = function(self)
+  end,
+  release = function(self)
+    self._class:delete(self)
+  end,
+  is_instance = function(self, cls)
+    return self.cls:is_instance(cls)
+  end,
+  equal = function(self, rhs)
+    return self == rhs
+  end,
+  __static = {
     _cache = {},
     _new = function(cls)
       if #cls._cache == 0 then
@@ -73,11 +69,11 @@ M.Object = M.ObjectBase:extend{
       obj:_clear()
       cls._cache[#cls._cache + 1] = obj
     end,
-    extend = function(cls, args)
-      args = DictUtils.merge({
-        static = { _cache = {} },
-      }, args)
-      return M.ObjectBase.extend(cls, args)
+    extend = function(cls, fields)
+      fields.__static = DictUtils.merge({
+        _cache = {},
+      }, fields.__static)
+      return M.ObjectBase.extend(cls, fields)
     end,
   },
 }

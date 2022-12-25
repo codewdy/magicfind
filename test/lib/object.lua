@@ -1,6 +1,6 @@
 local Object = require("lib.object").Object
 
-TestCase("object.new_and_delete", function()
+TestCase("lib.object.new_and_delete", function()
   Object._cache = {}
   local a = Object:new()
   local b = Object:new()
@@ -10,10 +10,10 @@ TestCase("object.new_and_delete", function()
   Assert(a ~= b)
 end)
 
-TestCase("object.extend", function()
+TestCase("lib.object.extend", function()
   Object._cache = {}
   local x = Object:new()
-  local cls = Object:extend{fields = { a = 1 }, static = { b = 2 }}
+  local cls = Object:extend{ a = 1, __static = { b = 2 }}
   local a = cls:new()
   local b = cls:new()
   a:release()
@@ -27,11 +27,11 @@ TestCase("object.extend", function()
   Assert(cls.b == 2)
 end)
 
-TestCase("object.extend_and_extend", function()
+TestCase("lib.object.extend_and_extend", function()
   Object._cache = {}
   local x = Object:new()
-  local cls = Object:extend{fields = { a = 1 }, static = { b = 2 }}
-  cls = cls:extend{fields = { a = 2 }, static = { c = 3 }}
+  local cls = Object:extend{ a = 1, __static = { b = 2 }}
+  cls = cls:extend{ a = 2, __static = { c = 3 }}
   local a = cls:new()
   local b = cls:new()
   a:release()
@@ -46,10 +46,10 @@ TestCase("object.extend_and_extend", function()
   Assert(cls.c == 3)
 end)
 
-TestCase("object.first_init", function()
+TestCase("lib.object.first_init", function()
   local x = 0
   local cls = Object:extend{
-    fields = {_first_init=function(self) self.x = x end}
+    _first_init=function(self) self.x = x end
   }
   local a = cls:new()
   x = 1
