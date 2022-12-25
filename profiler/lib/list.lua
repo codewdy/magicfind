@@ -1,4 +1,4 @@
-local list = require("lib.list")
+local List = require("lib.list").List
 
 K = 100
 
@@ -37,7 +37,7 @@ ProfilerCase{
 ProfilerCase{
   name = "lib.list.list_index",
   init = function(ctx)
-    ctx.lst = list.List:new()
+    ctx.lst = List:new()
     for i=1,K do
       ctx.lst:push_back(1)
     end
@@ -53,7 +53,7 @@ ProfilerCase{
 ProfilerCase{
   name = "lib.list.list_index_ipairs",
   init = function(ctx)
-    ctx.lst = list.List:new()
+    ctx.lst = List:new()
     for i=1,K do
       ctx.lst:push_back(1)
     end

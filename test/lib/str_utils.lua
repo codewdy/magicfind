@@ -1,8 +1,8 @@
-local str_utils = require("lib.str_utils")
+local StrUtils = require("lib.str_utils")
 
 TestCase("lib.str_utils.starts_with", function()
-  Assert(str_utils.starts_with("ABC", ""))
-  Assert(str_utils.starts_with("ABC", "A"))
-  Assert(str_utils.starts_with("ABC", "ABC"))
-  Assert(not str_utils.starts_with("ABC", "C"))
+  Assert(StrUtils.starts_with("ABC", ""))
+  Assert(StrUtils.starts_with("ABC", "A"))
+  Assert(StrUtils.starts_with("ABC", "ABC"))
+  Assert(not StrUtils.starts_with("ABC", "C"))
 end)

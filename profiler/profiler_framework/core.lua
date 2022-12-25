@@ -1,12 +1,12 @@
 local M = {}
 
-local dict_utils = require("lib.dict_utils")
-local str_utils = require("lib.str_utils")
+local DictUtils = require("lib.dict_utils")
+local StrUtils = require("lib.str_utils")
 
 M.cases = {}
 
 function M.profiler_case(args)
-  M.cases[args.name] = dict_utils.merge({
+  M.cases[args.name] = DictUtils.merge({
     init = function(ctx) end,
     time = 1
   }, args)
@@ -22,7 +22,7 @@ function M.profiler_main()
     for k, v in pairs(M.cases) do
       local found = false
       for i = 1,#arg do
-        if str_utils.starts_with(k, arg[i]) then
+        if StrUtils.starts_with(k, arg[i]) then
           found = true
         end
       end

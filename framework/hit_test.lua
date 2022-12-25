@@ -1,13 +1,13 @@
 local M = {}
 
-local object = require("lib.object")
-local list = require("lib.list")
+local Object = require("lib.object").Object
+local List = require("lib.list").List
 
-M.HitTest = object.Object:extend{
+M.HitTest = Object:extend{
   fields = {
     _first_init = function(self)
-      self.units = list.List:new()
-      self.result = list.List:new()
+      self.units = List:new()
+      self.result = List:new()
     end,
     _init = function(self, units)
       for i=1,units.size do

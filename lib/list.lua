@@ -1,8 +1,8 @@
 local M = {}
 
-local object = require("lib.object")
+local Object = require("lib.object").Object
 
-M.List = object.Object:extend{
+M.List = Object:extend{
   fields = {
     _first_init = function(self)
       self.size = 0

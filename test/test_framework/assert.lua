@@ -1,6 +1,6 @@
 local M = {}
 
-local list = require("lib.list")
+local List = require("lib.list").List
 
 function M.equal_msg(a, b)
   if type(a) ~= type(b) then
@@ -18,7 +18,7 @@ function M.equal_msg(a, b)
     end
   end
   if type(a) == "table" then
-    if list.List:is_list(a) or list.List:is_list(b) then
+    if List:is_list(a) or List:is_list(b) then
       if #a ~= #b then
         return " : length error. " .. tostring(#a) .. " vs " .. tostring(#b)
       end

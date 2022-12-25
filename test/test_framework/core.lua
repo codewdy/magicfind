@@ -1,6 +1,6 @@
 local M = {}
 
-local str_utils = require("lib.str_utils")
+local StrUtils = require("lib.str_utils")
 
 M.cases = {}
 
@@ -18,7 +18,7 @@ function M.test_main()
     for k, v in pairs(M.cases) do
       local found = false
       for i = 1,#arg do
-        if str_utils.starts_with(k, arg[i]) then
+        if StrUtils.starts_with(k, arg[i]) then
           found = true
         end
       end

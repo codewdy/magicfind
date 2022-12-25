@@ -1,11 +1,11 @@
-local hit_test = require("framework.hit_test")
-local list = require("lib.list")
+local HitTest = require("framework.hit_test").HitTest
+local List = require("lib.list").List
 
 ProfilerCase{
   name = "framework.hit_test.hit_circle",
   init = function(ctx)
     math.randomseed(0)
-    local units = list.List:new()
+    local units = List:new()
     for i=1,100 do
       local px = (math.random() - 0.5) * i
       local py = (math.random() - 0.5) * i
@@ -17,7 +17,7 @@ ProfilerCase{
         })
       end
     end
-    ctx.tester = hit_test.HitTest:new(units)
+    ctx.tester = HitTest:new(units)
   end,
   run = function(ctx)
     ctx.tester:hit_circle(0, 0, 1)
