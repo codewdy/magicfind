@@ -10,23 +10,3 @@ ProfilerCase{
     ctx.o:release()
   end,
 }
-
-ProfilerCase{
-  name = "lib.object.simple_new",
-  init = function(ctx)
-    Object._cache = {}
-  end,
-  run = function(ctx)
-    ctx.o = Object:new()
-  end,
-}
-
-ProfilerCase{
-  name = "lib.object.naive_new",
-  init = function(ctx)
-    Object._cache = {}
-  end,
-  run = function(ctx)
-    ctx.o = {}
-  end,
-}
