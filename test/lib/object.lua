@@ -46,6 +46,17 @@ TestCase("lib.object.extend_and_extend", function()
   Assert(cls.c == 3)
 end)
 
+TestCase("lib.object.default_field", function()
+  local cls = Object:extend{
+    x = 0
+  }
+  local a = cls:new()
+  local b = cls:new()
+  b.x = b.x + 1
+  Assert(a.x == 0)
+  Assert(b.x == 1)
+end)
+
 TestCase("lib.object.first_init", function()
   local x = 0
   local cls = Object:extend{
