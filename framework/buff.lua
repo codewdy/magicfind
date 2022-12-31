@@ -6,20 +6,22 @@ local Object = require("lib.object").Object
 M.LevelBuff = Object:extend{
   _init = function(self)
     self.level = 0
-    self.next_level = 0
+    self._level = 0
     self.duration = 0
   end,
   advance_timer = function(self)
     if self.duration > 0 then
       self.duration = self.duration - 1
+      self.level = self._level
       return true
     else
+      self._level = 0
       self.level = 0
       return false
     end
   end,
   merge = function(self, level, duration)
-    self.level = math.max(self.level, level)
+    self._level = math.max(self._level, level)
     self.duration = math.max(self.duration, duration)
   end,
 }
@@ -31,6 +33,7 @@ M.StackBuff = Object:extend{
   end,
   _init = function(self)
     self.level = 0
+    self._level = 0
     self.timer = 0
     for k,v in pairs(self.timeline) do
       self.timeline[k] = nil
@@ -39,9 +42,10 @@ M.StackBuff = Object:extend{
   advance_timer = function(self)
     self.timer = self.timer + 1
     if self.timeline[self.timer] ~= nil then
-      self.level = self.level - self.timeline[self.timer]
+      self._level = self._level - self.timeline[self.timer]
       self.timeline[self.timer] = nil
     end
+    self.level = self._level
     return next(self.timeline) ~= nil
   end,
   merge = function(self, level, duration)
@@ -49,7 +53,7 @@ M.StackBuff = Object:extend{
     if duration <= 0 then
       return
     end
-    self.level = self.level + level
+    self._level = self._level + level
     if self.timeline[self.timer + duration + 1] == nil then
       self.timeline[self.timer + duration + 1] = level
     else
