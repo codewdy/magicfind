@@ -14,9 +14,9 @@ M.SkillContext = Object:extend{
     if unit.skill_cooldown[self.idx] == nil then
       unit.skill_cooldown[self.idx] = 0
     end
-    unit.skill_cooldown[self.idx] = unit.skill_cooldown[self.idx] + self.args.cast_factor
-    while unit.skill_cooldown[self.idx] >= 1 do
-      unit.skill_cooldown[self.idx] = unit.skill_cooldown[self.idx] - 1
+    unit.skill_cooldown[self.idx] = unit.skill_cooldown[self.idx] + 1
+    while unit.skill_cooldown[self.idx] >= 1 / self.args.cast_factor do
+      unit.skill_cooldown[self.idx] = unit.skill_cooldown[self.idx] - 1 / self.args.cast_factor
       self.skill:cast(self, unit)
     end
   end,
