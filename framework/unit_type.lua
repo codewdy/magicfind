@@ -33,7 +33,7 @@ M.details.Skills = Object:extend{
   end,
   update = function(self, unit)
     for k,v in ipairs(self.skills) do
-      v:update(unit)
+      v:update(k, unit)
     end
   end,
 }
