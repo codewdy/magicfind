@@ -36,7 +36,7 @@ TestCase("framework.status.on_update", function()
       src.b = 1
     end,
   }
-  s:add_handler(handler)
+  s.update_handlers:push_back(handler)
   s:on_update(x)
   AssertEqual(x, { a = 1 })
   s:on_kill(x, nil)
