@@ -7,5 +7,6 @@ require("test.lib.list")
 
 require("test.framework.hit_test")
 require("test.framework.status")
+require("test.framework.buff")
 
 TestMain()

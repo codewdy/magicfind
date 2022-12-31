@@ -2,6 +2,7 @@ local M = {}
 
 local Object = require("lib.object").Object
 local DictUtils = require("lib.dict_utils")
+local BuffManager = require("framework.buff_manager").BuffManager
 
 M.Unit = Object:extend{
   _init = function(self, type, pos_x, pos_y)
@@ -12,6 +13,10 @@ M.Unit = Object:extend{
     self.max_hp = type.max_hp
     self.hp = type.max_hp
     self.death = false
+    self.buffs = BuffManager:new()
+  end,
+  _clear = function(self)
+    self.buffs:release()
   end,
   pre_update = function(self)
     self.status:reset()
