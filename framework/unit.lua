@@ -3,6 +3,7 @@ local M = {}
 local Object = require("lib.object").Object
 local DictUtils = require("lib.dict_utils")
 local BuffManager = require("framework.buff_manager").BuffManager
+local OwnedObjectList = require("lib.list").OwnedObjectList
 
 M.Unit = Object:extend{
   _init = function(self, type, pos_x, pos_y)
@@ -14,12 +15,16 @@ M.Unit = Object:extend{
     self.hp = type.max_hp
     self.death = false
     self.buffs = BuffManager:new()
+    self.skills = OwnedObjectList:new()
+    self.skill_cooldown = {}
   end,
   _clear = function(self)
     self.buffs:release()
+    self.skills:release()
   end,
   pre_update = function(self)
     self.status:reset()
+    self.skills:clear()
     self.type.modifiers:update(self)
     self.type.talents:update(self)
     self.buffs:update(self)
