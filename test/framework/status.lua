@@ -1,5 +1,5 @@
 local Status = require("framework.status").Status
-local Modifier = require("framework.status").Modifier
+local Modifier = require("framework.modifier").Modifier
 
 TestCase("framework.status.modifier", function()
   local m = Modifier:new()
