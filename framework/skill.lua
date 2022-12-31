@@ -1,6 +1,7 @@
 local M = {}
 
 local Object = require("lib.object").Object
+local DictUtils = require("lib.dict_utils")
 local SkillContext = require("framework.skill_context").SkillContext
 local Modifier = require("framework.modifier").Modifier
 
@@ -13,29 +14,25 @@ M.CastType = {
 }
 
 -- store in UnitType.skills. skill + how to cast it.
-M.SkillRunner = Object:extend{
-  _init = function(self, cast_type, skill, args)
+M.Skill = Object:extend{
+  _init = function(self, cast_type, args)
     self.cast_type = cast_type
-    self.skill = skill
-    self.args = args
+    self.args = DictUtils.merge(self.default_args, args)
+    self.tags = self.default_tags
   end,
   update = function(self, idx, unit)
     local args = {}
-    for k,v in pairs(self.skill.args) do
-      local base = v
-      if self.args[k] ~= nil then
-        base = self.args[k]
-      end
+    for k,v in pairs(self.args) do
       local mod = Modifier:new()
-      mod:merge(unit.status:modifier("skill_arg.name." .. self.skill.name .. "." .. k))
+      mod:merge(unit.status:modifier("skill_arg.name." .. self.name .. "." .. k))
       mod:merge(unit.status:modifier("skill_arg.global." .. k))
-      for _,tag in ipairs(self.skill.tag) do
+      for _,tag in ipairs(self.tags) do
         mod:merge(unit.status:modifier("skill_arg.tag." .. tag .. "." .. k))
       end
-      mod:add_base(base)
+      mod:add_base(v)
       args[k] = mod:value()
     end
-    local skill_context = SkillContext:new(idx, self.skill, args)
+    local skill_context = SkillContext:new(idx, self, args)
     if self.cast_type == M.CastType.OnUpdate then
       unit.status.update_handlers:push_back(skill_context)
     elseif self.cast_type == M.CastType.OnHit then
@@ -48,6 +45,9 @@ M.SkillRunner = Object:extend{
       unit.status.death_handlers:push_back(skill_context)
     end
   end,
+  cast = function(self, src, dst)
+    error("try cast a abstract skill")
+  end
 }
 
 return M
