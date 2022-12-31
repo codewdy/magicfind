@@ -37,9 +37,9 @@ M.Status = Object:extend{
   end,
   _init = function(self)
     for k,v in pairs(self.modifiers) do
+      self.modifiers[k] = nil
       v:release()
     end
-    self.modifiers = {}
     self:reset()
   end,
   reset = function(self)
