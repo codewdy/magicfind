@@ -58,23 +58,6 @@ M.Status = Object:extend{
     end
     return self.modifiers[name]
   end,
-  add_handler = function(self, handler)
-    if handler.on_update ~= nil then
-      self.update_handlers:push_back(handler)
-    end
-    if handler.on_struck ~= nil then
-      self.struck_handlers:push_back(handler)
-    end
-    if handler.on_hit ~= nil then
-      self.hit_handlers:push_back(handler)
-    end
-    if handler.on_kill ~= nil then
-      self.kill_handlers:push_back(handler)
-    end
-    if handler.on_death ~= nil then
-      self.death_handlers:push_back(handler)
-    end
-  end,
   on_update = function(self, unit)
     for i=1,self.update_handlers.size do
       self.update_handlers[i]:on_update(self, unit)
