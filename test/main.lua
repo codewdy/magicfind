@@ -6,5 +6,6 @@ require("test.lib.object")
 require("test.lib.list")
 
 require("test.framework.hit_test")
+require("test.framework.status")
 
 TestMain()
