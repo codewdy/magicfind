@@ -17,7 +17,7 @@ M.SkillContext = Object:extend{
     unit.skill_cooldown[self.idx] = unit.skill_cooldown[self.idx] + 1
     while unit.skill_cooldown[self.idx] >= 1 / self.args.cast_factor do
       unit.skill_cooldown[self.idx] = unit.skill_cooldown[self.idx] - 1 / self.args.cast_factor
-      self.skill:cast(self, unit)
+      self.skill:cast(self, unit, unit.target)
     end
   end,
   on_struck = function(self, src, dst)

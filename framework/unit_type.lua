@@ -43,11 +43,12 @@ M.UnitType = Object:extend{
     args = DictUtils.merge({
       modifiers = {},
       talents = {},
-      skills = {}
+      skills = {},
     }, args)
     self.modifiers = M.details.Modifiers:new(args.modifiers)
     self.talents = M.details.Talents:new(args.talents)
     self.skills = M.details.Skills:new(args.skills)
+    self.controller = args.controller
   end,
 }
 

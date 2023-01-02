@@ -17,10 +17,12 @@ M.Unit = Object:extend{
     self.buffs = BuffManager:new()
     self.skills = OwnedObjectList:new()
     self.skill_cooldown = {}
+    self.controller = type.controller:new(self)
   end,
   _clear = function(self)
     self.buffs:release()
     self.skills:release()
+    self.controller:release()
   end,
   pre_update = function(self)
     self.status:reset()
@@ -39,6 +41,7 @@ M.Unit = Object:extend{
     end
   end,
   update = function(self)
+    self.target = self.controller:find_target()
     self.status:on_update(self)
   end,
   on_struck = function(self, unit)
@@ -52,6 +55,9 @@ M.Unit = Object:extend{
   end,
   on_death = function(self, unit)
     self.status:on_death(self, unit)
+  end,
+  move = function(self)
+    self.controller:move()
   end,
 }
 
