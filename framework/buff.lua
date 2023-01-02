@@ -24,6 +24,9 @@ M.LevelBuff = Object:extend{
     self._level = math.max(self._level, level)
     self.duration = math.max(self.duration, duration)
   end,
+  update = function(self, unit)
+    error("try use a abstract buff")
+  end,
 }
 
 -- new buff will stack with old buff
@@ -59,6 +62,9 @@ M.StackBuff = Object:extend{
     else
       self.timeline[self.timer + duration + 1] = self.timeline[self.timer + duration + 1] + level
     end
+  end,
+  update = function(self, unit)
+    error("try use a abstract buff")
   end,
 }
 

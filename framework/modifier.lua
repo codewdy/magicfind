@@ -26,7 +26,7 @@ M.Modifier = Object:extend{
   merge = function(self, rhs)
     self.base = self.base + rhs.base
     self.increse = self.increse + rhs.increse
-    self.more = self.more + rhs.more
+    self.more = self.more * rhs.more
   end
 }
 

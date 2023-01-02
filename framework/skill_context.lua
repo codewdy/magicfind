@@ -17,27 +17,27 @@ M.SkillContext = Object:extend{
     unit.skill_cooldown[self.idx] = unit.skill_cooldown[self.idx] + 1
     while unit.skill_cooldown[self.idx] >= 1 / self.args.cast_factor do
       unit.skill_cooldown[self.idx] = unit.skill_cooldown[self.idx] - 1 / self.args.cast_factor
-      self.skill:cast(self, unit, unit.target)
+      self.skill:cast(self.args, unit, unit.target)
     end
   end,
   on_struck = function(self, src, dst)
     if math.random() < self.args.cast_factor then
-      self.skill:cast(self, src, dst)
+      self.skill:cast(self.args, src, dst)
     end
   end,
   on_hit = function(self, src, dst)
     if math.random() < self.args.cast_factor then
-      self.skill:cast(self, src, dst)
+      self.skill:cast(self.args, src, dst)
     end
   end,
   on_kill = function(self, src, dst)
     if math.random() < self.args.cast_factor then
-      self.skill:cast(self, src, dst)
+      self.skill:cast(self.args, src, dst)
     end
   end,
   on_death = function(self, src, dst)
     if math.random() < self.args.cast_factor then
-      self.skill:cast(self, src, dst)
+      self.skill:cast(self.args, src, dst)
     end
   end,
 }

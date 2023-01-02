@@ -15,6 +15,9 @@ M.CastType = {
 
 -- store in UnitType.skills. skill + how to cast it.
 M.Skill = Object:extend{
+  name = "UNKNOWN",
+  default_args = {},
+  default_tags = {},
   _init = function(self, cast_type, args)
     self.cast_type = cast_type
     self.args = DictUtils.merge(self.default_args, args)
@@ -45,7 +48,7 @@ M.Skill = Object:extend{
       unit.status.death_handlers:push_back(skill_context)
     end
   end,
-  cast = function(self, src, dst)
+  cast = function(self, args, src, dst)
     error("try cast a abstract skill")
   end
 }

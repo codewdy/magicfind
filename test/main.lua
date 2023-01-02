@@ -8,5 +8,6 @@ require("test.lib.list")
 require("test.framework.hit_test")
 require("test.framework.status")
 require("test.framework.buff")
+require("test.framework.e2e_sketolon")
 
 TestMain()

@@ -38,7 +38,7 @@ M.Status = Object:extend{
   end,
   on_update = function(self, unit)
     for i=1,self.update_handlers.size do
-      self.update_handlers[i]:on_update(self, unit)
+      self.update_handlers[i]:on_update(unit)
     end
   end,
   on_struck = function(self, src, dest)

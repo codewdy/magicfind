@@ -4,6 +4,7 @@ local Object = require("lib.object").Object
 local DictUtils = require("lib.dict_utils")
 local BuffManager = require("framework.buff_manager").BuffManager
 local OwnedObjectList = require("lib.list").OwnedObjectList
+local Status = require("framework.status").Status
 
 M.Unit = Object:extend{
   _init = function(self, type, pos_x, pos_y)
@@ -18,14 +19,19 @@ M.Unit = Object:extend{
     self.skills = OwnedObjectList:new()
     self.skill_cooldown = {}
     self.controller = type.controller:new(self)
+    self.status = Status:new()
   end,
   _clear = function(self)
     self.buffs:release()
     self.skills:release()
     self.controller:release()
+    self.status:release()
   end,
   pre_update = function(self)
     self.status:reset()
+
+    self.status:modifier("max_hp"):add_base(self.type.max_hp)
+
     self.skills:clear()
     self.type.modifiers:update(self)
     self.type.talents:update(self)
@@ -36,8 +42,8 @@ M.Unit = Object:extend{
 
     -- if max_hp is updated, update hp
     if self.status.max_hp ~= self.max_hp then
-      self.hp = self.hp / self.max_hp * self.status.max_hp
-      self.max_hp = self.status.max_hp
+      self.hp = self.hp / self.max_hp * self.max_hp
+      self.max_hp = self.max_hp
     end
   end,
   update = function(self)

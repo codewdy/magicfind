@@ -44,11 +44,15 @@ M.UnitType = Object:extend{
       modifiers = {},
       talents = {},
       skills = {},
+      size = 1,
+      max_hp = 1,
     }, args)
     self.modifiers = M.details.Modifiers:new(args.modifiers)
     self.talents = M.details.Talents:new(args.talents)
     self.skills = M.details.Skills:new(args.skills)
     self.controller = args.controller
+    self.size = args.size
+    self.max_hp = args.max_hp
   end,
 }
 
