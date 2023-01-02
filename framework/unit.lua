@@ -38,12 +38,12 @@ M.Unit = Object:extend{
     self.buffs:update(self)
     self.type.skills:update(self)
 
+    local origin_max_hp = self.max_hp
     self.max_hp = self.status:modifier("max_hp"):value()
 
     -- if max_hp is updated, update hp
-    if self.status.max_hp ~= self.max_hp then
-      self.hp = self.hp / self.max_hp * self.max_hp
-      self.max_hp = self.max_hp
+    if origin_max_hp ~= self.max_hp then
+      self.hp = self.hp / origin_max_hp * self.max_hp
     end
   end,
   update = function(self)
