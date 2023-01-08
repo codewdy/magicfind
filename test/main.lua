@@ -1,3 +1,5 @@
+require("main")
+
 require("test.test_framework.api")
 
 require("test.lib.str_utils")
