@@ -1,3 +1,6 @@
 {
-  "Lua.diagnostics.disable": ["unused-local"]
+    "Lua.diagnostics.disable": [
+        "unused-local"
+    ],
+    "Lua.workspace.checkThirdParty": false
 }
