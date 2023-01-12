@@ -7,7 +7,7 @@ local OwnedObjectList = require("lib.list").OwnedObjectList
 local Status = require("framework.status").Status
 
 M.Unit = Object:extend{
-  _init = function(self, type, pos_x, pos_y)
+  _init = function(self, battle_runner, type, pos_x, pos_y)
     self.type = type
     self.pos_x = pos_x
     self.pos_y = pos_y
@@ -20,12 +20,14 @@ M.Unit = Object:extend{
     self.skill_cooldown = {}
     self.controller = type.controller:new(self)
     self.status = Status:new()
+    self.battle_runner = battle_runner
   end,
   _clear = function(self)
     self.buffs:release()
     self.skills:release()
     self.controller:release()
     self.status:release()
+    self.battle_runner = nil
   end,
   pre_update = function(self)
     self.status:reset()
