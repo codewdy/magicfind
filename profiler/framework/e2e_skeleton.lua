@@ -6,7 +6,7 @@ ProfilerCase{
   init = function(ctx)
     ctx.sketelon = {}
     for i=1,1000 do
-      ctx.sketelon[i] = Unit:new(nil, Skeleton, 0, 0)
+      ctx.sketelon[i] = Unit:new(Skeleton)
     end
   end,
   run = function(ctx)
