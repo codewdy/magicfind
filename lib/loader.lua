@@ -7,11 +7,10 @@ local StrUtils = require("lib.str_utils")
 
 function M.load(args)
   args = DictUtils.merge({
-    src = ScriptUtils.script_path(1),
     prefix = "",
     exclude = {},
   }, args)
-  local lst = FsUtils.get_all_files(args.src)
+  local lst = FsUtils.get_all_files(ScriptUtils.root_path .. args.prefix:gsub("%.", "/"))
   for _,f in ipairs(lst) do
     local exclude = false
     for __,e in ipairs(args.exclude) do

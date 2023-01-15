@@ -1,4 +1,4 @@
-require("main")
+require("main").load()
 
 require("test.test_framework.api")
 
