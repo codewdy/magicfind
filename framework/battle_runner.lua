@@ -1,7 +1,6 @@
 local M = {}
 
 local Object = require("lib.object").Object
-local Context = require("framework.context").Context
 local Config = require("framework.config")
 local OwnedObjectList = require("lib.list").OwnedObjectList
 local List = require("lib.list").List
