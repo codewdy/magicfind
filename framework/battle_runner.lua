@@ -13,6 +13,7 @@ M.BattleRunner = Object:extend{
     self.owned_units = OwnedObjectList:new()
     self.units = List:new()
     self.effects = OwnedObjectList:new()
+    self.player = nil
   end,
   _clear = function(self)
     self.map:release()
@@ -40,13 +41,17 @@ M.BattleRunner = Object:extend{
     end
     self.frame = self.frame + 1
   end,
-  add_unit = function(self, unit, owned)
+  set_player = function(self, unit)
+    self.player = unit
     unit.idx = self.idx
     self.idx = self.idx + 1
     self.units:push_back(unit)
-    if owned == nil or owned then
-      self.owned_units:push_back(unit)
-    end
+  end,
+  add_unit = function(self, unit)
+    unit.idx = self.idx
+    self.idx = self.idx + 1
+    self.units:push_back(unit)
+    self.owned_units:push_back(unit)
   end,
   add_effect = function(self, effect)
     effect.idx = self.idx

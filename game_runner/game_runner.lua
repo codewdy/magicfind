@@ -15,7 +15,7 @@ M.GameRunner = Object:extend{
   new_battle = function(self)
     self.battle_runner = BattleRunner:new(nil)
     self.player.unit:set_loc(self.battle_runner, 0, 0)
-    self.battle_runner:add_unit(self.player.unit, false)
+    self.battle_runner:set_player(self.player.unit, false)
   end,
 }
 
