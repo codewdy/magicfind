@@ -21,6 +21,7 @@ M.SkeletonSkill = Skill:extend{
 }
 
 M.Skeleton = UnitType:new{
+  name = "Skeleton",
   controller = NoAI,
   skills = {
     M.SkeletonSkill:new(CastType.OnUpdate, {

@@ -41,12 +41,14 @@ M.details.Skills = Object:extend{
 M.UnitType = Object:extend{
   _init = function(self, args)
     args = DictUtils.merge({
+      name = "",
       modifiers = {},
       talents = {},
       skills = {},
       size = 1,
       max_hp = 1,
     }, args)
+    self.name = args.name
     self.modifiers = M.details.Modifiers:new(args.modifiers)
     self.talents = M.details.Talents:new(args.talents)
     self.skills = M.details.Skills:new(args.skills)
