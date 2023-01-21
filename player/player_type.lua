@@ -7,6 +7,7 @@ M.PlayerType = UnitType:new{
   name = "Player",
   controller = NoAI,
   max_hp = 1,
+  size = 2,
 }
 
 return M
