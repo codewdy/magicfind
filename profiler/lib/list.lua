@@ -3,7 +3,7 @@ local List = require("lib.list").List
 ProfilerCase{
   name = "lib.list.list_index",
   init = function(ctx)
-    ctx.lst = List:new()
+    ctx.lst = List()
     for i=1,100 do
       ctx.lst:push_back(1)
     end

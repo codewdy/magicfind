@@ -30,7 +30,7 @@ M.details.MapCellGenerator = Object:extend{
     cache = {},
     xnew = function(cls, arg)
       if cls.cache[arg] == nil then
-        cls.cache[arg] = cls:new(arg)
+        cls.cache[arg] = cls(arg)
       end
       return cls.cache[arg]
     end,
@@ -68,7 +68,7 @@ M.MapTemplate = Object:extend{
     self.spawner = args.spawner
     self.block = {}
     for idx,b in ipairs(args.block) do
-      self.block[idx] = M.details.MapBlockSpec:new(self.block_w, self.block_h, b)
+      self.block[idx] = M.details.MapBlockSpec(self.block_w, self.block_h, b)
     end
   end,
   generate = function(self)

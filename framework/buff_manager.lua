@@ -21,7 +21,7 @@ M.BuffManager = Object:extend{
   end,
   add_buff = function(self, buff_type, level, duration)
     if self.buffs[buff_type] == nil then
-      self.buffs[buff_type] = buff_type:new()
+      self.buffs[buff_type] = buff_type()
     end
     self.buffs[buff_type]:merge(level, duration)
   end,

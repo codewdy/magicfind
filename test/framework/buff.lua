@@ -2,7 +2,7 @@ local LevelBuff = require("framework.buff").LevelBuff
 local StackBuff = require("framework.buff").StackBuff
 
 TestCase("framework.buff.LevelBuff", function()
-  local buff = LevelBuff:new()
+  local buff = LevelBuff()
   AssertEqual(buff.level, 0)
   buff:merge(10, 2)
   AssertEqual(buff.level, 0)
@@ -27,7 +27,7 @@ TestCase("framework.buff.LevelBuff", function()
 end)
 
 TestCase("framework.buff.StackBuff", function()
-  local buff = StackBuff:new()
+  local buff = StackBuff()
   AssertEqual(buff.level, 0)
   buff:merge(10, 2)
   AssertEqual(buff.level, 0)

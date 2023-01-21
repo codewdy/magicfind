@@ -13,11 +13,11 @@ M.Unit = Object:extend{
     self.max_hp = type.max_hp
     self.hp = type.max_hp
     self.death = false
-    self.buffs = BuffManager:new()
-    self.skills = OwnedObjectList:new()
+    self.buffs = BuffManager()
+    self.skills = OwnedObjectList()
     self.skill_cooldown = {}
-    self.controller = type.controller:new(self)
-    self.status = Status:new()
+    self.controller = type.controller(self)
+    self.status = Status()
   end,
   _clear = function(self)
     self.buffs:release()

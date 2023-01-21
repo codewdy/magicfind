@@ -6,7 +6,7 @@ ProfilerCase{
   init = function(ctx)
     ctx.sketelon = {}
     for i=1,1000 do
-      ctx.sketelon[i] = Unit:new(Skeleton)
+      ctx.sketelon[i] = Unit(Skeleton)
     end
   end,
   run = function(ctx)

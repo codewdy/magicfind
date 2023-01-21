@@ -6,11 +6,11 @@ local Modifier = require("framework.modifier").Modifier
 
 M.Status = Object:extend{
   _first_init = function(self)
-    self.update_handlers = List:new()
-    self.struck_handlers = List:new()
-    self.hit_handlers = List:new()
-    self.kill_handlers = List:new()
-    self.death_handlers = List:new()
+    self.update_handlers = List()
+    self.struck_handlers = List()
+    self.hit_handlers = List()
+    self.kill_handlers = List()
+    self.death_handlers = List()
     self.modifiers = {}
   end,
   _init = function(self)
@@ -32,7 +32,7 @@ M.Status = Object:extend{
   end,
   modifier = function(self, name)
     if self.modifiers[name] == nil then
-      self.modifiers[name] = Modifier:new()
+      self.modifiers[name] = Modifier()
     end
     return self.modifiers[name]
   end,

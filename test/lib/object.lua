@@ -2,22 +2,22 @@ local Object = require("lib.object").Object
 
 TestCase("lib.object.new_and_delete", function()
   Object._cache = {}
-  local a = Object:new()
-  local b = Object:new()
+  local a = Object()
+  local b = Object()
   a:release()
-  local c = Object:new()
+  local c = Object()
   Assert(a == c)
   Assert(a ~= b)
 end)
 
 TestCase("lib.object.extend", function()
   Object._cache = {}
-  local x = Object:new()
+  local x = Object()
   local cls = Object:extend{ a = 1, __static = { b = 2 }}
-  local a = cls:new()
-  local b = cls:new()
+  local a = cls()
+  local b = cls()
   a:release()
-  local c = cls:new()
+  local c = cls()
   Assert(a == c)
   Assert(a ~= b)
   Assert(a ~= x)
@@ -29,13 +29,13 @@ end)
 
 TestCase("lib.object.extend_and_extend", function()
   Object._cache = {}
-  local x = Object:new()
+  local x = Object()
   local cls = Object:extend{ a = 1, __static = { b = 2 }}
   cls = cls:extend{ a = 2, __static = { c = 3 }}
-  local a = cls:new()
-  local b = cls:new()
+  local a = cls()
+  local b = cls()
   a:release()
-  local c = cls:new()
+  local c = cls()
   Assert(a == c)
   Assert(a ~= b)
   Assert(a ~= x)
@@ -50,8 +50,8 @@ TestCase("lib.object.default_field", function()
   local cls = Object:extend{
     x = 0
   }
-  local a = cls:new()
-  local b = cls:new()
+  local a = cls()
+  local b = cls()
   b.x = b.x + 1
   Assert(a.x == 0)
   Assert(b.x == 1)
@@ -62,9 +62,9 @@ TestCase("lib.object.first_init", function()
   local cls = Object:extend{
     _first_init=function(self) self.x = x end
   }
-  local a = cls:new()
+  local a = cls()
   x = 1
-  local b = cls:new()
+  local b = cls()
   Assert(a.x == 0)
   Assert(b.x == 1)
 end)

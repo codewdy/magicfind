@@ -10,9 +10,9 @@ M.BattleRunner = Object:extend{
     self.frame = 0
     self.idx = 0
     self.map = map
-    self.owned_units = OwnedObjectList:new()
-    self.units = List:new()
-    self.effects = OwnedObjectList:new()
+    self.owned_units = OwnedObjectList()
+    self.units = List()
+    self.effects = OwnedObjectList()
     self.player = nil
   end,
   _clear = function(self)

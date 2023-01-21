@@ -49,9 +49,9 @@ M.UnitType = Object:extend{
       max_hp = 1,
     }, args)
     self.name = args.name
-    self.modifiers = M.details.Modifiers:new(args.modifiers)
-    self.talents = M.details.Talents:new(args.talents)
-    self.skills = M.details.Skills:new(args.skills)
+    self.modifiers = M.details.Modifiers(args.modifiers)
+    self.talents = M.details.Talents(args.talents)
+    self.skills = M.details.Skills(args.skills)
     self.controller = args.controller
     self.size = args.size
     self.max_hp = args.max_hp

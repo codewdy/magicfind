@@ -5,8 +5,8 @@ local List = require("lib.list").List
 
 M.HitTest = Object:extend{
   _first_init = function(self)
-    self.units = List:new()
-    self.result = List:new()
+    self.units = List()
+    self.result = List()
   end,
   _init = function(self, units)
     for i=1,units.size do

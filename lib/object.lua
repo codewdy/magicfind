@@ -2,6 +2,12 @@ local M = {}
 
 local DictUtils = require("lib.dict_utils")
 
+local class_meta = {
+  __call = function(self, ...)
+    return self:new(...)
+  end,
+}
+
 M.ObjectBase = {
   fields = {},
   _meta = { __index = {} },
@@ -13,6 +19,7 @@ M.ObjectBase = {
     rst.fields._class = rst
     rst._meta = { __index = rst.fields }
     rst.base = cls
+    setmetatable(rst, class_meta)
     return rst
   end,
   new = function(cls)
@@ -30,6 +37,8 @@ M.ObjectBase = {
     end
   end,
 }
+
+setmetatable(M.ObjectBase, class_meta)
 
 M.Object = M.ObjectBase:extend{
   _init = function(self)

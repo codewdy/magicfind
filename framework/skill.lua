@@ -26,7 +26,7 @@ M.Skill = Object:extend{
   update = function(self, idx, unit)
     local args = {}
     for k,v in pairs(self.args) do
-      local mod = Modifier:new()
+      local mod = Modifier()
       mod:merge(unit.status:modifier("skill_arg.name." .. self.name .. "." .. k))
       mod:merge(unit.status:modifier("skill_arg.global." .. k))
       for _,tag in ipairs(self.tags) do
@@ -35,7 +35,7 @@ M.Skill = Object:extend{
       mod:add_base(v)
       args[k] = mod:value()
     end
-    local skill_context = SkillContext:new(idx, self, args)
+    local skill_context = SkillContext(idx, self, args)
     if self.cast_type == M.CastType.OnUpdate then
       unit.status.update_handlers:push_back(skill_context)
     elseif self.cast_type == M.CastType.OnHit then

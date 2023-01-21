@@ -2,7 +2,7 @@ local Status = require("framework.status").Status
 local Modifier = require("framework.modifier").Modifier
 
 TestCase("framework.status.modifier", function()
-  local m = Modifier:new()
+  local m = Modifier()
   m:add_base(3)
   m:add_base(2)
   m:add_increase(0.5)
@@ -13,7 +13,7 @@ TestCase("framework.status.modifier", function()
 end)
 
 TestCase("framework.status.status_modifier", function()
-  local s = Status:new()
+  local s = Status()
   s:modifier("X"):add_base(3)
   s:modifier("X"):add_base(2)
   s:modifier("X"):add_increase(0.5)
@@ -26,7 +26,7 @@ TestCase("framework.status.status_modifier", function()
 end)
 
 TestCase("framework.status.on_update", function()
-  local s = Status:new()
+  local s = Status()
   local x = {}
   local handler = {
     on_update = function(self, src)
