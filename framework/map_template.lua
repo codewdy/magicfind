@@ -60,8 +60,25 @@ M.details.MapBlockSpec = Object:extend{
   end
 }
 
+M.MapCollection = Object:extend{
+  _init = function(self)
+    self.collection = {}
+    self.list = {}
+  end,
+  add = function(self, map)
+    self.collection[map.name] = map
+    table.insert(self.list, map)
+  end,
+  random = function(self, map)
+    return self.list[math.random(#self.list)]
+  end,
+}
+
+M.DefaultMapCollection = M.MapCollection()
+
 M.MapTemplate = Object:extend{
   _init = function(self, args)
+    self.name = args.name
     self.block_w = args.block_w
     self.block_h = args.block_h
     self.map_w = args.map_w
@@ -132,6 +149,12 @@ M.MapTemplate = Object:extend{
       map = map,
       spawn = spawn
     }
+  end,
+  register = function(self, collection)
+    if collection == nil then
+      collection = M.MapCollection
+    end
+    collection:add(self)
   end,
 }
 
