@@ -54,7 +54,7 @@ M.details.MapBlockSpec = Object:extend{
     for i=0,self.w-1 do
       for j=0,self.h-1 do
         local idx = i*self.h+j+1
-        map.add(x + i, y + j, self.list[idx]:gen())
+        map:add(x + i, y + j, self.list[idx]:gen())
       end
     end
   end
@@ -93,7 +93,7 @@ M.MapTemplate = Object:extend{
     local map = Map(self.block_w * self.map_w, self.block_h * self.map_h)
     local block_random_list = {}
     local block_pool = {}
-    for _,block in self.block do
+    for _,block in ipairs(self.block) do
       if (block.min ~= nil) then
         for i=1,block.min do
           table.insert(block_pool, block)
@@ -111,7 +111,7 @@ M.MapTemplate = Object:extend{
     end
     for i=#block_pool+1,self.map_w*self.map_h do
       local total_rank = 0
-      for _,b in block_random_list do
+      for _,b in ipairs(block_random_list) do
         if b[2] > 0 then
           total_rank = total_rank + b[1].weight
         end
@@ -135,9 +135,10 @@ M.MapTemplate = Object:extend{
       block_pool[i] = block_pool[idx]
       block_pool[idx] = tmp
     end
-    for i=0,self.w-1 do
-      for j=0,self.h-1 do
-        block_pool[i*self.h+j]:add_to_map(i * self.block_w, j * self.block_h, map)
+    for i=0,self.map_w-1 do
+      for j=0,self.map_h-1 do
+        block_pool[i*self.map_h+j+1]:add_to_map(
+            map, i * self.block_w, j * self.block_h)
       end
     end
     return map
