@@ -87,6 +87,7 @@ M.Repeat = M.Base:extend{
         table.insert(ret, n)
       end
     end
+    return ret
   end
 }
 
